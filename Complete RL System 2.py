@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
-
 # # Assignment 3 - Completing the Parameter Study
-# 
+
 # Welcome to Course 4 Programming Assignment 3. In the previous assignments, you completed the implementation of the Lunar Lander environment and implemented an agent with neural networks and the Adam optimizer. As you may remember, we discussed a number of key meta-parameters that affect the performance of the agent (e.g. the step-size, the temperature parameter for the softmax policy, the capacity of the replay buffer). We can use rules of thumb for picking reasonable values for these meta-parameters. However, we can also study the impact of these meta-parameters on the performance of the agent to gain insight.
-# 
+
 # In this assignment, you will conduct a careful experiment analyzing performance of an agent, under different values of the step-size parameter.
-# 
+
 # **In this assignment, you will:**
-# 
+
 # - write a script to run your agent and environment on a set of parameters, to determine performance across these parameters.
 # - gain insight into the impact of the step-size parameter on agent performance by examining its parameter sensitivity curve.
 
@@ -19,6 +18,7 @@
 # - [RL-Glue](http://www.jmlr.org/papers/v10/tanner09a.html) : Library for reinforcement learning experiments.
 # - [tqdm](https://tqdm.github.io/) : A package to display progress bar when running experiments
 
+
 # In[1]:
 
 
@@ -28,8 +28,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 get_ipython().run_line_magic('matplotlib', 'inline')
 
+
 import os
 from tqdm import tqdm
+
 
 from rl_glue import RLGlue
 from environment import BaseEnvironment
