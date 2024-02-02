@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
-
 # # Assignment 2 - Implement your agent
-# 
-# Welcome to Course 4, Programming Assignment 2! We have learned about reinforcement learning algorithms for prediction and control in previous courses and extended those algorithms to large state spaces using function approximation. One example of this was in assignment 2 of course 3 where we implemented semi-gradient TD for prediction and used a neural network as the function approximator. In this notebook, we will build a reinforcement learning agent for control, again using a neural network for function approximation. This combination of neural network function approximators and reinforcement learning algorithms, often referred to as Deep RL, is an active area of research and has led to many impressive results (e. g., AlphaGo: https://deepmind.com/research/case-studies/alphago-the-story-so-far).
-# 
+# Welcome to Course 4, Programming Assignment 2! We have learned about reinforcement learning algorithms for prediction and control in previous courses and extended those algorithms to large state spaces using function approximation. One example of this was in assignment 2 of course 3 where we implemented semi-gradient TD for prediction and used a neural network as the function approximator. In this notebook, we will build a reinforcement learning agent for control, again using a neural network for function approximation. This combination of neural network function approximators and reinforcement learning algorithms, often referred to as Deep RL, is an active area of research and has led to many impressive results (e. g., AlphaGo: https://deepmind.com/research/case-studies/alphago-the-story-so-far). 
 # **In this assignment, you will:**
 #   1. Extend the neural network code from assignment 2 of course 3 to output action-values instead of state-values.
 #   2. Write up the Adam algorithm for neural network optimization.
@@ -12,7 +9,6 @@
 #   4. Implement Softmax action-selection.
 #   5. Build an Expected Sarsa agent by putting all the pieces together.
 #   6. Solve Lunar Lander with your agent.
-
 # ## Packages
 # - [numpy](www.numpy.org) : Fundamental package for scientific computing with Python.
 # - [matplotlib](http://matplotlib.org) : Library for plotting graphs in Python.
@@ -24,9 +20,7 @@
 # - [os](https://docs.python.org/3/library/os.html): Package used to interface with the operating system. Here we use it for creating a results folder when it does not exist.
 # - [shutil](https://docs.python.org/3/library/shutil.html): Package used to operate on files and folders. Here we use it for creating a zip file of the results folder.
 # - plot_script: Used for plotting learning curves using matplotlib.
-
 # In[47]:
-
 
 # Do not modify this cell!
 
@@ -47,21 +41,17 @@ import os
 import shutil
 from plot_script import plot_result
 
-
 # ## Section 1: Action-Value Network
 # This section includes the function approximator that we use in our agent, a neural network. In Course 3 Assignment 2, we used a neural network as the function approximator for a policy evaluation problem. In this assignment, we will use a neural network for approximating the action-value function in a control problem. The main difference between approximating a state-value function and an action-value function using a neural network is that in the former the output layer only includes one unit whereas in the latter the output layer includes as many units as the number of actions. 
-# 
 # In the cell below, you will specify the architecture of the action-value neural network. More specifically, you will specify `self.layer_sizes` in the `__init__()` function. 
 # 
 # We have already provided `get_action_values()` and `get_TD_update()` methods. The former computes the action-value function by doing a forward pass and the latter computes the gradient of the action-value function with respect to the weights times the TD error. These `get_action_values()` and `get_TD_update()` methods are similar to the `get_value()` and `get_gradient()` methods that you implemented in Course 3 Assignment 2. The main difference is that in this notebook, they are designed to be applied to batches of states instead of one state. You will later use these functions for implementing the agent.
 
 # In[48]:
-
-
 # -----------
 # Graded Cell
 # -----------
-
+*****************************************
 # Work Required: Yes. Fill in the code for layer_sizes in __init__ (~1 Line). 
 # Also go through the rest of the code to ensure your understanding is correct.
 class ActionValueNetwork:
