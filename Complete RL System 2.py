@@ -1,27 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 # # Assignment 3 - Completing the Parameter Study
-
 # Welcome to Course 4 Programming Assignment 3. In the previous assignments, you completed the implementation of the Lunar Lander environment and implemented an agent with neural networks and the Adam optimizer. As you may remember, we discussed a number of key meta-parameters that affect the performance of the agent (e.g. the step-size, the temperature parameter for the softmax policy, the capacity of the replay buffer). We can use rules of thumb for picking reasonable values for these meta-parameters. However, we can also study the impact of these meta-parameters on the performance of the agent to gain insight.
-
 # In this assignment, you will conduct a careful experiment analyzing performance of an agent, under different values of the step-size parameter.
-
 # **In this assignment, you will:**
-
 # - write a script to run your agent and environment on a set of parameters, to determine performance across these parameters.
 # - gain insight into the impact of the step-size parameter on agent performance by examining its parameter sensitivity curve.
-
 # ## Packages
 # 
 # - [numpy](www.numpy.org) : Fundamental package for scientific computing with Python.
 # - [matplotlib](http://matplotlib.org) : Library for plotting graphs in Python.
 # - [RL-Glue](http://www.jmlr.org/papers/v10/tanner09a.html) : Library for reinforcement learning experiments.
 # - [tqdm](https://tqdm.github.io/) : A package to display progress bar when running experiments
-
-
 # In[1]:
-
-
 # Import necessary libraries
 # DO NOT IMPORT OTHER LIBRARIES - This will break the autograder.
 import numpy as np
@@ -39,14 +30,9 @@ from agent import BaseAgent
 from dummy_environment import DummyEnvironment
 from dummy_agent import DummyAgent
 
-
-# ## Section 1: Write Parameter Study Script
-# 
+# ## Section 1: Write Parameter Study Script 
 # In this section, you will write a script for performing parameter studies. You will implement the `run_experiment()` function. This function takes an environment and agent and performs a parameter study on the step-size and termperature parameters.
-
 # In[2]:
-
-
 # -----------
 # Graded Cell
 # -----------
@@ -89,7 +75,6 @@ def run_experiment(environment, agent, environment_parameters, agent_parameters,
     ### END CODE HERE
     # your code here
     
-    
     ### Replace the Nones with the correct values in the rest of the code
 
     # for loop over different values of tau
@@ -97,14 +82,11 @@ def run_experiment(environment, agent, environment_parameters, agent_parameters,
     for i in tqdm(range(len(agent_parameters["tau"]))):
     # for i in tqdm(range(TODO)):
     # your code here
-    
         
         # for loop over different values of the step-size
         for j in range(len(agent_parameters["step_size"])): 
         # for j in range(TODO):
         # your code here
-        
-
             ### Specify env_info 
             env_info = {}
 
@@ -113,12 +95,9 @@ def run_experiment(environment, agent, environment_parameters, agent_parameters,
                           "input_dim": environment_parameters["input_dim"],
                           "discount_factor": environment_parameters["discount_factor"],
                           "tau": agent_parameters["tau"][i],
-                          "step_size": agent_parameters["step_size"][j]}
-                         
+                          "step_size": agent_parameters["step_size"][j]}  
             
             # your code here
-            
-
             # for loop over runs
             for run in range(experiment_parameters["num_runs"]):
             # for run in range(TODO): 
@@ -130,7 +109,6 @@ def run_experiment(environment, agent, environment_parameters, agent_parameters,
                 # Beginning of the run            
                 rl_glue.rl_init(agent_info, env_info)
                 for episode in range(experiment_parameters["num_episodes"]):
-                
                     
                     # Run episode
                     rl_glue.rl_episode(0) # no step limit
@@ -143,16 +121,11 @@ def run_experiment(environment, agent, environment_parameters, agent_parameters,
                     os.makedirs('results')
 
             save_name = "{}".format(rl_glue.agent.name).replace('.','')
-
             # save sum reward
             np.save("results/sum_reward_{}".format(save_name), agent_sum_reward) 
 
-
 # Run the following code to test your implementation of `run_experiment()` given a dummy agent and a dummy environment for 100 runs, 100 episodes, 12 values of the step-size, and 4 values of $\tau$:
-
 # In[3]:
-
-
 # --------------
 # Debugging Cell
 # --------------
@@ -192,16 +165,13 @@ assert(np.allclose(sum_reward_dummy_agent, sum_reward_dummy_agent_answer))
 
 print("Passed the assert!")
 
-
 # In[4]:
-
 
 # -----------
 # Tested Cell
 # -----------
 # The contents of the cell will be tested by the autograder.
 # If they do not pass here, they will not pass there.
-
 # Experiment parameters
 experiment_parameters = {
     "num_runs" : 100,
@@ -214,7 +184,6 @@ environment_parameters = {
     "num_actions": 4, 
     "discount_factor" : 0.99
 }
-
 agent_parameters = {
     "step_size": 3e-5 * np.power(2.0, np.array([-6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5])),
     "tau": np.array([0.001, 0.01, 0.1, 1.0]),
@@ -229,11 +198,9 @@ run_experiment(test_env,
                environment_parameters, 
                agent_parameters, 
                experiment_parameters)
-
 sum_reward_dummy_agent = np.load("results/sum_reward_dummy_agent.npy")
 sum_reward_dummy_agent_answer = np.load("asserts/sum_reward_dummy_agent.npy")
 assert(np.allclose(sum_reward_dummy_agent, sum_reward_dummy_agent_answer))
-
 
 # ## Section 2: The Parameter Study for the Agent with Neural Network and Adam Optimizer
 # 
@@ -256,15 +223,5 @@ assert(np.allclose(sum_reward_dummy_agent, sum_reward_dummy_agent_answer))
 # ### **Wrapping up!** 
 # 
 # Congratulations, you have completed the Capstone project! In Assignment 1 (Module 1), you designed the reward function for the Lunar Lander environment. In Assignment 2 (Module 4), you implemented your Expected Sarsa agent with a neural network and Adam optimizer. In Assignment 3 (Module 5), you conducted a careful parameter study and examined the effect of changing the step size parameter on the performance of the agent. Thanks for sticking with us throughout the specialization! At this point, you should have a solid foundation for formulating your own reinforcement learning problems, understanding advanced topics in reinforcement learning, and even pursuing graduate studies.
-
 # In[ ]:
-
-
-
-
-
 # In[ ]:
-
-
-
-
